@@ -13,15 +13,16 @@ public class ClienteRepositoryImpl implements ClienteRepository {
 
     public Cliente salvar(Cliente cliente){
         Cliente _cliente = databaseInMemory.get(cliente.getId());
-        if (_cliente == null) {
+        //if (_cliente == null) {
+            databaseInMemory.remove(cliente.getId());
             databaseInMemory.put(cliente.getId(), cliente);
-        }
+        //}
         return cliente;
     }
 
     public Cliente recupera(Long id) {
         Cliente _cliente = databaseInMemory.get(id);
-       
+
         return _cliente;
     }
 }
