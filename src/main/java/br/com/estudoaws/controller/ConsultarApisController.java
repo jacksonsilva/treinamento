@@ -3,6 +3,7 @@ package br.com.estudoaws.controller;
 import br.com.estudoaws.model.Cep;
 import br.com.estudoaws.model.Cliente;
 import br.com.estudoaws.model.Estados;
+import br.com.estudoaws.model.Municipio;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,15 @@ public class ConsultarApisController {
         List<Estados> result = Arrays.asList(estados);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @GetMapping(path = "/api/municipio/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Municipio> consultarMunicipios(@PathVariable("id") String id) throws Exception {
+        String uri = String.format("https://servicodados.ibge.gov.br/api/v1/localidades/estados/%s/municipios", id);
+        RestTemplate restTemplate = new RestTemplate();
+
+        Municipio municipio = restTemplate.getForObject(uri, Municipio.class);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(municipio);
     }
 }
