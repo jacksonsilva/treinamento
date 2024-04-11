@@ -28,8 +28,7 @@ public class ClienteController {
     @PutMapping(path = "/cliente/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cliente> consultar(@PathVariable("id") Long id, @RequestBody Cliente cliente) throws Exception {
 
-        Cliente _cliente;
-        _cliente = clienteRepository.recupera(cliente.getId());
+        Cliente _cliente = clienteRepository.recupera(cliente.getId());
         if (_cliente == null) {
             throw new Exception("Cliente não encontrado!");
         }
